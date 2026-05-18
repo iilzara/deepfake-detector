@@ -5,3 +5,4 @@ uploads/
 dataset/
 *.pyc
 .DS_Store
+*.pth
