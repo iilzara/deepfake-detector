@@ -178,7 +178,7 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--text-p
 .upload-sub { font-size: 0.9rem; color: var(--text-muted); }
 .upload-browse { background: none; border: none; color: var(--pink-400); cursor: pointer; font-family: var(--font-body); font-size: 0.9rem; text-decoration: underline; padding: 0; }
 .upload-browse--eff { color: var(--lavender); }
-.upload-formats { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px; }
+.upload-formats { font-size: 0.76rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px; }
 .upload-preview { width: 100%; min-height: 240px; display: flex; align-items: center; justify-content: center; position: relative; }
 .upload-preview img { max-width: 100%; max-height: 300px; border-radius: var(--radius); object-fit: contain; }
 .remove-btn { position: absolute; top: 10px; right: 10px; background: var(--bg-card); border: 1px solid var(--border-mid); color: var(--text-muted); border-radius: 6px; width: 32px; height: 32px; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
