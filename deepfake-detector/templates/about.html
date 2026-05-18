@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}About — DeepScan{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <div class="section-label">The Project</div>
+        <h1>About DeepScan</h1>
+        <p>A diploma project focused on using machine learning to fight synthetic media and protect digital trust.</p>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="section-inner">
+
+        <div class="about-intro">
+            <div class="about-text">
+                <h2>Why This Matters</h2>
+                <p>Deepfakes — AI-generated or manipulated images — are becoming increasingly realistic and accessible. They pose serious threats to personal reputation, political integrity, and public trust in digital media.</p>
+                <p>DeepScan was built as a response to this growing problem. We implemented and compared two approaches: a CNN trained from scratch to demonstrate original work, and EfficientNet fine-tuned for comparison — showing the trade-off between originality and performance.</p>
+            </div>
+            <div class="about-quote">
+                <blockquote>"Seeing is no longer believing — but AI can help us find the truth."</blockquote>
+            </div>
+        </div>
+
+        <div class="project-info-grid">
+            <div class="info-card"><div class="info-label">Project Title</div><div class="info-value">Development and Implementation of a Web Service for Deepfake Detection to Enhance Users' Digital Security</div></div>
+            <div class="info-card"><div class="info-label">Type</div><div class="info-value">Diploma / Graduation Project</div></div>
+            <div class="info-card"><div class="info-label">Models</div><div class="info-value">Custom CNN (from scratch) + EfficientNet-B0 (comparison)</div></div>
+            <div class="info-card"><div class="info-label">Scope</div><div class="info-value">Image-based deepfake detection (photos & portraits)</div></div>
+        </div>
+
+        <div class="tech-stack-section">
+            <h2>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item"><div class="tech-name">Python</div><div class="tech-desc">Core language</div></div>
+                <div class="tech-item"><div class="tech-name">PyTorch</div><div class="tech-desc">Neural network framework</div></div>
+                <div class="tech-item"><div class="tech-name">Flask</div><div class="tech-desc">Web service framework</div></div>
+                <div class="tech-item"><div class="tech-name">EfficientNet</div><div class="tech-desc">Comparison model</div></div>
+                <div class="tech-item"><div class="tech-name">OpenCV</div><div class="tech-desc">Image processing</div></div>
+                <div class="tech-item"><div class="tech-name">Pillow</div><div class="tech-desc">Image loading</div></div>
+                <div class="tech-item"><div class="tech-name">Google Colab</div><div class="tech-desc">GPU training</div></div>
+                <div class="tech-item"><div class="tech-name">GitHub</div><div class="tech-desc">Version control</div></div>
+            </div>
+        </div>
+
+        <div class="limitations-box">
+            <h3>Scope & Limitations</h3>
+            <p>DeepScan is designed specifically for <strong>image-based</strong> deepfake detection. The current version does not support:</p>
+            <ul>
+                <li>Video deepfake detection</li>
+                <li>Audio manipulation detection</li>
+                <li>Real-time webcam analysis</li>
+            </ul>
+            <p>These may be explored in future versions of the project.</p>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

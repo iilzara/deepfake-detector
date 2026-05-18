@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block title %}CNN Detector — DeepScan{% endblock %}
+
+{% block content %}
+<section class="page-hero page-hero--cnn">
+    <div class="page-hero-inner">
+        <div class="model-badge model-badge--cnn">Custom CNN — Built From Scratch</div>
+        <h1>Detect with Our CNN Model</h1>
+        <p>Our own convolutional neural network, designed and trained entirely from scratch using PyTorch — no pre-trained weights.</p>
+        <div class="model-stats">
+            <div class="mstat"><span class="mstat-num">5</span><span class="mstat-label">Conv Blocks</span></div>
+            <div class="mstat-div"></div>
+            <div class="mstat"><span class="mstat-num">~80%</span><span class="mstat-label">Accuracy</span></div>
+            <div class="mstat-div"></div>
+            <div class="mstat"><span class="mstat-num">36k</span><span class="mstat-label">Training Images</span></div>
+            <div class="mstat-div"></div>
+            <div class="mstat"><span class="mstat-num">224px</span><span class="mstat-label">Input Size</span></div>
+        </div>
+        <a href="/detect-efficientnet" class="switch-link">Switch to EfficientNet detector →</a>
+    </div>
+</section>
+
+<section class="detector-section">
+    <div class="detector-inner">
+        <div class="detector-card">
+            <div class="upload-zone" id="uploadZone">
+                <input type="file" id="fileInput" accept="image/*" hidden>
+                <div class="upload-content" id="uploadContent">
+                    <div class="upload-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="4" y="4" width="40" height="40" rx="8" stroke="#60A5FA" stroke-width="1.5" stroke-dasharray="5 4"/>
+                            <path d="M24 32V20M24 20l-5 5M24 20l5 5" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 36h20" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+                        </svg>
+                    </div>
+                    <p class="upload-main">Drop your image here</p>
+                    <p class="upload-sub">or <button class="upload-browse" onclick="document.getElementById('fileInput').click()">browse files</button></p>
+                    <p class="upload-formats">JPG, PNG, WEBP — max 16MB</p>
+                </div>
+                <div class="upload-preview" id="uploadPreview" style="display:none;">
+                    <img id="previewImg" src="" alt="Preview">
+                    <button class="remove-btn" id="removeBtn">✕</button>
+                </div>
+            </div>
+            <button class="btn-primary btn-large btn-full" id="analyzeBtn" disabled onclick="analyzeImage()">
+                <span id="btnText">Select an image to begin</span>
+            </button>
+            <div class="result-box" id="resultBox" style="display:none;"></div>
+        </div>
+
+        <div class="tips-card">
+            <h3>About this model</h3>
+            <div class="model-info-list">
+                <div class="model-info-item"><span class="info-label">Architecture</span><span class="info-val">Custom 5-block CNN</span></div>
+                <div class="model-info-item"><span class="info-label">Framework</span><span class="info-val">PyTorch</span></div>
+                <div class="model-info-item"><span class="info-label">Pre-trained</span><span class="info-val info-val--no">No — from scratch</span></div>
+                <div class="model-info-item"><span class="info-label">Dataset</span><span class="info-val">GAN faces + Modern AI images</span></div>
+                <div class="model-info-item"><span class="info-label">Trained on</span><span class="info-val">Google Colab T4 GPU</span></div>
+                <div class="model-info-item"><span class="info-label">Val accuracy</span><span class="info-val info-val--acc">~78–81%</span></div>
+            </div>
+            <div class="compare-box">
+                <p>Want higher accuracy?</p>
+                <a href="/detect-efficientnet" class="btn-compare">Try EfficientNet →</a>
+            </div>
+            <div class="privacy-note">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4v5c0 3.314 2.686 6 6 6s6-2.686 6-6V4L8 2z" stroke="#60A5FA" stroke-width="1.2"/></svg>
+                <span>Images deleted immediately after analysis</span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const fileInput = document.getElementById('fileInput');
+const uploadZone = document.getElementById('uploadZone');
+const uploadContent = document.getElementById('uploadContent');
+const uploadPreview = document.getElementById('uploadPreview');
+const previewImg = document.getElementById('previewImg');
+const removeBtn = document.getElementById('removeBtn');
+const analyzeBtn = document.getElementById('analyzeBtn');
+const btnText = document.getElementById('btnText');
+const resultBox = document.getElementById('resultBox');
+
+function showPreview(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+        previewImg.src = e.target.result;
+        uploadContent.style.display = 'none';
+        uploadPreview.style.display = 'flex';
+        analyzeBtn.disabled = false;
+        btnText.textContent = 'Analyze with CNN';
+        resultBox.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+}
+
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) showPreview(fileInput.files[0]); });
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+uploadZone.addEventListener('drop', e => {
+    e.preventDefault(); uploadZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) { fileInput.files = e.dataTransfer.files; showPreview(file); }
+});
+removeBtn.addEventListener('click', () => {
+    fileInput.value = '';
+    uploadContent.style.display = 'flex';
+    uploadPreview.style.display = 'none';
+    analyzeBtn.disabled = true;
+    btnText.textContent = 'Select an image to begin';
+    resultBox.style.display = 'none';
+});
+
+async function analyzeImage() {
+    if (!fileInput.files[0]) return;
+    analyzeBtn.disabled = true;
+    btnText.textContent = 'Analyzing with CNN...';
+    resultBox.style.display = 'none';
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+    try {
+        const response = await fetch('/predict', { method: 'POST', body: formData });
+        const data = await response.json();
+        if (data.error) { showError(data.error); return; }
+        showResult(data.result, data.confidence);
+    } catch (err) { showError('Something went wrong. Please try again.'); }
+    finally { analyzeBtn.disabled = false; btnText.textContent = 'Analyze Again'; }
+}
+
+function showResult(label, confidence) {
+    const isReal = label === 'REAL';
+    resultBox.style.display = 'block';
+    resultBox.className = 'result-box result-box--' + (isReal ? 'real' : 'fake');
+    resultBox.innerHTML = `
+        <div class="result-header">
+            <div class="result-icon result-icon--${isReal ? 'real':'fake'}">${isReal ? '✓':'✗'}</div>
+            <div class="result-verdict result-verdict--${isReal ? 'real':'fake'}">${isReal ? 'Real Image':'Deepfake Detected'}</div>
+        </div>
+        <div class="result-model-tag">Detected by: Custom CNN Model</div>
+        <div class="result-confidence">
+            <div class="confidence-label"><span>Confidence</span><span>${confidence}%</span></div>
+            <div class="confidence-bar"><div class="confidence-fill confidence-fill--${isReal ? 'real':'fake'}" style="width:${confidence}%"></div></div>
+        </div>
+        <p class="result-note">${isReal ? 'This image appears to be an authentic photograph (' + confidence + '% confidence).' : 'This image shows signs of AI generation or manipulation (' + confidence + '% confidence).'}</p>
+        <a href="/detect-efficientnet" class="result-compare-link">Compare with EfficientNet →</a>`;
+}
+
+function showError(msg) {
+    resultBox.style.display = 'block';
+    resultBox.className = 'result-box result-box--error';
+    resultBox.innerHTML = '<p style="color:#f87171;text-align:center;padding:1rem;">⚠ ' + msg + '</p>';
+}
+</script>
+{% endblock %}

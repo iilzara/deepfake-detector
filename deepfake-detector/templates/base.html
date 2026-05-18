@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DeepScan{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">
+            <div class="logo-icon">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="10" stroke="#60A5FA" stroke-width="1.5"/>
+                    <circle cx="11" cy="11" r="4" fill="#60A5FA" opacity="0.3"/>
+                    <circle cx="11" cy="11" r="1.5" fill="#60A5FA"/>
+                    <line x1="11" y1="1" x2="11" y2="5" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="11" y1="17" x2="11" y2="21" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="1" y1="11" x2="5" y2="11" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="17" y1="11" x2="21" y2="11" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <span>DeepScan</span>
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">Home</a>
+            <div class="nav-dropdown">
+                <span class="nav-link nav-link--dropdown {% if request.endpoint in ['detect','detect_efficientnet'] %}active{% endif %}">Detect ▾</span>
+                <div class="nav-dropdown-menu">
+                    <a href="/detect" class="dropdown-item {% if request.endpoint == 'detect' %}active{% endif %}">
+                        <div class="dropdown-icon cnn-icon">CNN</div>
+                        <div>
+                            <div class="dropdown-title">Custom CNN</div>
+                            <div class="dropdown-sub">Our model — built from scratch</div>
+                        </div>
+                    </a>
+                    <a href="/detect-efficientnet" class="dropdown-item {% if request.endpoint == 'detect_efficientnet' %}active{% endif %}">
+                        <div class="dropdown-icon eff-icon">EN</div>
+                        <div>
+                            <div class="dropdown-title">EfficientNet</div>
+                            <div class="dropdown-sub">Pre-trained comparison model</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <a href="/how-it-works" class="nav-link {% if request.endpoint == 'how_it_works' %}active{% endif %}">How It Works</a>
+            <a href="/about" class="nav-link {% if request.endpoint == 'about' %}active{% endif %}">About</a>
+        </div>
+        <div class="nav-cta-group">
+            <a href="/detect" class="nav-cta nav-cta--cnn">CNN</a>
+            <a href="/detect-efficientnet" class="nav-cta nav-cta--eff">EfficientNet</a>
+        </div>
+        <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="nav-mobile" id="mobileMenu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/detect" class="nav-link">Detect — Custom CNN</a>
+        <a href="/detect-efficientnet" class="nav-link">Detect — EfficientNet</a>
+        <a href="/how-it-works" class="nav-link">How It Works</a>
+        <a href="/about" class="nav-link">About</a>
+    </div>
+</nav>
+
+<main>{% block content %}{% endblock %}</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <span class="footer-logo">DeepScan</span>
+            <p>AI-powered deepfake detection for a safer digital world.</p>
+        </div>
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/detect">CNN Detector</a>
+            <a href="/detect-efficientnet">EfficientNet Detector</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/about">About</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 DeepScan — Diploma Project. Built with Python, Flask & PyTorch.</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('hamburger').addEventListener('click', function() {
+        document.getElementById('mobileMenu').classList.toggle('open');
+    });
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

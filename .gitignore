@@ -1,0 +1,7 @@
+*.pth
+__pycache__/
+.venv/
+uploads/
+dataset/
+*.pyc
+.DS_Store

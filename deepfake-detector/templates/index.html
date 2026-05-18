@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}DeepScan — AI Deepfake Detection{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-bg"><div class="hero-grid"></div><div class="hero-glow"></div></div>
+    <div class="hero-inner">
+        <div class="hero-badge"><span class="badge-dot"></span>AI-Powered Detection System</div>
+        <h1 class="hero-title">Can You Trust<br><span class="hero-highlight">What You See?</span></h1>
+        <p class="hero-sub">DeepScan uses deep learning to detect AI-generated and manipulated face images. Choose between our custom-built CNN or EfficientNet for comparison.</p>
+        <div class="hero-actions">
+            <a href="/detect" class="btn-primary">Try Our CNN Model</a>
+            <a href="/detect-efficientnet" class="btn-eff-outline">Try EfficientNet →</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat"><span class="stat-num">CNN</span><span class="stat-label">Custom Architecture</span></div>
+            <div class="stat-divider"></div>
+            <div class="stat"><span class="stat-num">36k+</span><span class="stat-label">Training Images</span></div>
+            <div class="stat-divider"></div>
+            <div class="stat"><span class="stat-num">2</span><span class="stat-label">Detection Models</span></div>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="model-compare-card">
+            <div class="compare-row">
+                <div class="compare-model compare-model--cnn">
+                    <div class="compare-model-label">Custom CNN</div>
+                    <div class="compare-model-acc">~80%</div>
+                    <div class="compare-model-sub">Built from scratch</div>
+                    <a href="/detect" class="compare-model-btn">Try →</a>
+                </div>
+                <div class="compare-vs">VS</div>
+                <div class="compare-model compare-model--eff">
+                    <div class="compare-model-label">EfficientNet</div>
+                    <div class="compare-model-acc">~90%+</div>
+                    <div class="compare-model-sub">Pre-trained (Google)</div>
+                    <a href="/detect-efficientnet" class="compare-model-btn compare-model-btn--eff">Try →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="section-inner">
+        <div class="section-label">What We Offer</div>
+        <h2 class="section-title">Built for Digital Security</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3L4 7v8c0 5.523 4.477 10 10 10s10-4.477 10-10V7L14 3z" stroke="#60A5FA" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 14l3 3 5-5" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <h3>Two Detection Models</h3>
+                <p>Compare our custom CNN built from scratch against EfficientNet fine-tuned on our dataset. See the difference in real time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#60A5FA" stroke-width="1.5"/><path d="M14 9v5l3 3" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <h3>Fast Analysis</h3>
+                <p>Upload any portrait photo and get a real vs. fake verdict in under 2 seconds with a confidence percentage.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="4" stroke="#60A5FA" stroke-width="1.5"/><path d="M9 14h10M14 9v10" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <h3>Modern AI Images</h3>
+                <p>Trained on both GAN-generated faces and modern AI images from Midjourney, DALL-E, and Stable Diffusion.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 20l6-6 4 4 5-7 5 5" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <h3>Confidence Score</h3>
+                <p>Every prediction includes a confidence percentage so you know exactly how certain the model is.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4C8.477 4 4 8.477 4 14s4.477 10 10 10 10-4.477 10-10S19.523 4 14 4z" stroke="#60A5FA" stroke-width="1.5"/><path d="M14 10v4l2.5 2.5" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <h3>Privacy First</h3>
+                <p>Uploaded images are analyzed and immediately deleted. We never store your photos on our servers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 8h16M6 14h10M6 20h13" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <h3>Open Source</h3>
+                <p>The full training pipeline and model code is available on GitHub. Fully reproducible and auditable.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-inner">
+        <h2>Ready to Detect a Deepfake?</h2>
+        <p>Try both models and compare the results.</p>
+        <div class="cta-btns">
+            <a href="/detect" class="btn-primary btn-large">Custom CNN</a>
+            <a href="/detect-efficientnet" class="btn-eff btn-large">EfficientNet</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

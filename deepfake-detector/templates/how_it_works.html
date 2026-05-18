@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}How It Works — DeepScan{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <div class="section-label">The Technology</div>
+        <h1>How It Works</h1>
+        <p>A deep dive into both model architectures, training process, and detection pipeline.</p>
+    </div>
+</section>
+
+<section class="hiw-section">
+    <div class="section-inner">
+
+        <div class="hiw-steps">
+            <div class="hiw-step"><div class="step-num">01</div><div class="step-content"><h3>Image Upload</h3><p>You upload a portrait image through the web interface. Accepted in JPG, PNG, or WEBP format under 16MB.</p></div></div>
+            <div class="hiw-connector"></div>
+            <div class="hiw-step"><div class="step-num">02</div><div class="step-content"><h3>Preprocessing</h3><p>The image is resized to 224×224 pixels, normalized across RGB channels, and converted to a PyTorch tensor — identical to training.</p></div></div>
+            <div class="hiw-connector"></div>
+            <div class="hiw-step"><div class="step-num">03</div><div class="step-content"><h3>Model Inference</h3><p>The tensor passes through either our custom CNN or EfficientNet-B0. Both extract visual features like texture artifacts and blending inconsistencies.</p></div></div>
+            <div class="hiw-connector"></div>
+            <div class="hiw-step"><div class="step-num">04</div><div class="step-content"><h3>Classification</h3><p>The classifier outputs two scores — REAL and FAKE. Softmax converts these into a probability, giving you a confidence percentage.</p></div></div>
+        </div>
+
+        <div class="models-compare-section">
+            <h2>Model Comparison</h2>
+            <div class="models-compare-grid">
+                <div class="model-compare-detail model-compare-detail--cnn">
+                    <div class="mcd-header"><span class="mcd-badge cnn-badge">Custom CNN</span></div>
+                    <div class="mcd-arch">5 Conv Blocks → FC Layers → Output</div>
+                    <div class="mcd-stats-grid">
+                        <div><span class="mcd-label">Input</span><span class="mcd-val">224×224</span></div>
+                        <div><span class="mcd-label">Filters</span><span class="mcd-val">64→512</span></div>
+                        <div><span class="mcd-label">Pre-trained</span><span class="mcd-val">No</span></div>
+                        <div><span class="mcd-label">Accuracy</span><span class="mcd-val">~80%</span></div>
+                        <div><span class="mcd-label">Optimizer</span><span class="mcd-val">AdamW</span></div>
+                        <div><span class="mcd-label">Epochs</span><span class="mcd-val">20</span></div>
+                    </div>
+                </div>
+                <div class="model-compare-detail model-compare-detail--eff">
+                    <div class="mcd-header"><span class="mcd-badge eff-badge">EfficientNet-B0</span></div>
+                    <div class="mcd-arch">MBConv Blocks → Global Pool → FC → Output</div>
+                    <div class="mcd-stats-grid">
+                        <div><span class="mcd-label">Input</span><span class="mcd-val">224×224</span></div>
+                        <div><span class="mcd-label">Pre-trained</span><span class="mcd-val">ImageNet</span></div>
+                        <div><span class="mcd-label">Fine-tuned</span><span class="mcd-val">Yes</span></div>
+                        <div><span class="mcd-label">Accuracy</span><span class="mcd-val">~90%+</span></div>
+                        <div><span class="mcd-label">Optimizer</span><span class="mcd-val">Adam</span></div>
+                        <div><span class="mcd-label">Epochs</span><span class="mcd-val">10</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="training-grid">
+            <div class="training-card"><div class="training-icon">📦</div><h3>Dataset</h3><p>Trained on 36k images — 18k real faces and 18k AI-generated deepfakes from GAN and modern generators like Midjourney and DALL-E.</p></div>
+            <div class="training-card"><div class="training-icon">⚙️</div><h3>Training Setup</h3><p>Both models trained on Google Colab T4 GPU. CNN: 20 epochs, AdamW. EfficientNet: 10 epochs, Adam with step scheduler.</p></div>
+            <div class="training-card"><div class="training-icon">🔀</div><h3>Data Augmentation</h3><p>Random flips, rotations (±15°), color jitter, random grayscale, and random perspective to improve generalization.</p></div>
+            <div class="training-card"><div class="training-icon">🛡️</div><h3>Overfitting Prevention</h3><p>Dropout layers (0.1–0.5), BatchNorm after each convolution, weight decay, and label smoothing keep both models generalizing well.</p></div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
