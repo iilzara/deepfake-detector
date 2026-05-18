@@ -16,7 +16,7 @@ if os.path.exists('deepfake_model_v3.pth'):
     cnn_model = load_cnn()
     print("✓ CNN model loaded")
 else:
-    print("⚠️  deepfake_model_v3.pth not found")
+    print("  deepfake_model_v3.pth not found")
 
 # ── Load EfficientNet model ────────────────────────────
 eff_model = None
@@ -25,7 +25,7 @@ if os.path.exists('deepfake_efficientnet.pth'):
     eff_model = load_efficientnet()
     print("✓ EfficientNet model loaded")
 else:
-    print("⚠️  deepfake_efficientnet.pth not found")
+    print("️  deepfake_efficientnet.pth not found")
 
 
 def allowed_file(filename):
